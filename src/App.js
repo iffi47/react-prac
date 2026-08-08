@@ -8,7 +8,8 @@ function App() {
   return (
    <div>
     <AddUser getUserData={setUsers} />
-    <UserList users={users} />
+    {users.length === 0 && <p className="text">No users</p>}
+    {users.length > 0 && <UserList users={users} />}
    </div>
   );
 }
