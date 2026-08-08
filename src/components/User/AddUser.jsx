@@ -10,6 +10,7 @@ export default function AddUser({ getUserData }) {
     age: "",
     id: null
   });
+  const [error, setError] = useState()
   const handleInputData = (identifier, data) => {
     setUserData((prevData) => {
       return {
@@ -22,6 +23,7 @@ export default function AddUser({ getUserData }) {
     event.preventDefault();
     const ageNum = +userData.age;
     if (userData.username.trim().length === 0 || !ageNum || ageNum <= 0) {
+      setError({ title: "Invalid Input", message: "Please enter a valid name and age (non-empty values)" })
       return;
     }
 
@@ -43,10 +45,13 @@ export default function AddUser({ getUserData }) {
       age: "",
       id: null
     });
+  };
+  const errorHandler = () => {
+    setError(null)
   }
   return (
     <>
-      <ErrorModal title="An Error Occurred!" message="Something went wrong" />
+      {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler} />}
       <Card className={classes.input}>
         <form onSubmit={handleUserSubmission}>
           <label htmlFor="username">Username</label>
