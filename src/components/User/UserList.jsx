@@ -7,7 +7,7 @@ export default function UserList({ users }) {
       <Card className={classes.users}>
         <ul>
           {users.map((user) => (
-            <li>{user.username} is have age {user.age}</li>
+            <li key={user.name}>{user.username} is have age {user.age}</li>
           ))
           }
         </ul>
